@@ -1,6 +1,6 @@
 #### Cours_work
 Simple telegram bot with payment api
-
+```
 [ ] **Initialize the bot**
       - []initialize file struckture 
       - []create requirements file 
@@ -16,3 +16,4 @@ Simple telegram bot with payment api
       - [] find hosting 
       - [] Improve serever usage
       - [] _Create tests for final part_
+```
