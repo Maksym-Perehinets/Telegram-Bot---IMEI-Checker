@@ -6,7 +6,7 @@ bot = TeleBot(BOT_TOKEN)
 
 
 
-users = {}
+users = {} #Huyna
 
 
 @bot.message_handler(commands=['start'])
