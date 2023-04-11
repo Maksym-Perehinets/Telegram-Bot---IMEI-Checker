@@ -2,7 +2,7 @@ from telebot import TeleBot, types
 from config import BOT_TOKEN
 
 bot = TeleBot(BOT_TOKEN)
-r = 2
+r = 2#allaala
 
 huylo = 5
 users = {} 
