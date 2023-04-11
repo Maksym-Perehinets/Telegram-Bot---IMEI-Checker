@@ -1,9 +1,8 @@
 from telebot import TeleBot, types
-
 from config import BOT_TOKEN
 
 bot = TeleBot(BOT_TOKEN)
-r = 0
+r = 2
 
 huylo = 5
 users = {} 
@@ -47,9 +46,5 @@ def get_user_gender(msg: types.Message):
 
     bot.send_message(msg.chat.id, f'Uhu your name:{user["name"]}\n your age {user["age"]}\n your gender {user["gender"]}',
     )
-
-
-
-
 
 bot.infinity_polling()
