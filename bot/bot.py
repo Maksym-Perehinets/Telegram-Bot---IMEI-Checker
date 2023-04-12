@@ -1,6 +1,6 @@
 from telebot import TeleBot, types
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
-import json
+from imei_http_req import ImeiRequests
 from config import BOT_TOKEN
 
 
@@ -16,7 +16,7 @@ def start_command(msg: types.Message):
 @bot.message_handler(commands=['button'])
 def buttons(msg: types.Message):
     markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
-    markup.add(KeyboardButton('Cheak my imei'), KeyboardButton('Say my name'), KeyboardButton('None'))
+    markup.add(KeyboardButton('Cheak my imei'), KeyboardButton('Test http req'), KeyboardButton('None'))
     bot.send_message(msg.chat.id, 'chose what you need', reply_markup=markup)
 
 
@@ -24,10 +24,12 @@ def buttons(msg: types.Message):
 def button_answ(msg: types.Message):
     if msg.text == 'Cheak my imei':
         bot.send_message(msg.chat.id, 'Enter your imei:')
-    elif msg.text == 'Say my name':
-        msg_json = msg.json['from']
-        bot.send_message(msg.chat.id, str(msg_json['first_name']))
-    bot.register_next_step_handler(msg, imei_cheak)
+        bot.register_next_step_handler(msg, imei_cheak)
+    elif msg.text == 'Test http req':
+        bot.send_message(msg.chat.id, str(ImeiRequests.test_request()))
+        bot.register_next_step_handler(msg, imei_cheak)
+    bot.register_next_step_handler(msg, buttons)
+
 
 
 def imei_cheak(msg: types.Message):
