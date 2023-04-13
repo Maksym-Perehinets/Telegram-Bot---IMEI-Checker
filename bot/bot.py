@@ -24,7 +24,7 @@ def button_answ(msg: types.Message):
     if msg.text == 'Check my imei':  # Case one(checking imei actuality)
         bot.send_message(msg.chat.id, 'Enter your imei:')
         bot.register_next_step_handler(msg, imei_cheak)
-    elif msg.text == 'Test http req':  # Case two(sending a test request)
+    elif msg.text == 'Test api req':  # Case two(sending a test request)
         bot.send_message(msg.chat.id, str(ImeiRequests.test_request()))
         bot.register_next_step_handler(msg, buttons)
     bot.register_next_step_handler(msg, buttons)  # Returns to options
