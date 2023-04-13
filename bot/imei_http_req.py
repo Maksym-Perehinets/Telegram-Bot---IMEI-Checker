@@ -23,7 +23,6 @@ class ImeiRequests:
         for item in prices:
             print(item)
 
-
     def test_request():
         # getting a json with prices and other data
         result = requests.get(test).json()
