@@ -25,7 +25,7 @@ def button_answ(msg: types.Message):
         bot.send_message(msg.chat.id, 'Enter your imei:')
         bot.register_next_step_handler(msg, imei_cheak)
     elif msg.text == 'Test api req':  # Case two(sending a test request)
-        bot.send_message(msg.chat.id, str(ImeiRequests.test_request()))
+        bot.send_message(msg.chat.id, str(ImeziRequests.test_request()))
         bot.register_next_step_handler(msg, buttons)
     bot.register_next_step_handler(msg, buttons)  # Returns to options
 
@@ -34,7 +34,7 @@ def imei_cheak(msg: types.Message):  # Doing shit and lie =)
     bot.send_message(msg.chat.id, f"imei {msg.text} is valid")
     bot.register_next_step_handler(msg, buttons)
 
-bot.delete_webhook()
+
 if __name__ == '__main__':
     try:
         bot.infinity_polling()
