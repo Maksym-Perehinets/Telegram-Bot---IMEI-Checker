@@ -4,7 +4,6 @@ test = f'http://api-client.imei.org/api/services?apikey={API_KEY}'
 
 services_id = 0
 
-#test_array[3] = {API_KEY, services_id, imei} #хулі тестовий ерей словником опинився
 prices = []
 
 
