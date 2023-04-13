@@ -8,22 +8,17 @@ prices = []
 
 class ImeiRequests:
 
-    def output(req):  # to tak nepracuie
+    def output(self, req):  # to tak nepracuie
         for item in req["response"]["services"]:
             prices.append(item)
         for item in prices:
             return item
 
-
-    #Geting
+    # Geting valid pricec and services id`s
     def geting_valid_price_information():
         response = requests.get(api_requests).json()
         for item in response['response']['services']:
-            services
-
-
-
-
+            services.update({item['name'], []})
 
     # def get_price():
     #    # getting a json with prices and other data
@@ -36,8 +31,9 @@ class ImeiRequests:
 
     def test_request():
         # getting a json with prices and other data
-        result = requests.get(test).json()
+        result = requests.get(api_requests).json()
         print(result)
         return result
+
 
 ImeiRequests.geting_valid_price_information()
