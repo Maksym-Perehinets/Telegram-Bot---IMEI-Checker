@@ -10,7 +10,7 @@ prices = []
 
 class ImeiRequests:
 
-    def __output(req): # to tak nepracuie
+    def output(req): # to tak nepracuie
         for item in req["response"]["services"]:
             prices.append(item)
         for item in prices:
@@ -19,7 +19,7 @@ class ImeiRequests:
     def apple_advanced_check(imei):
         services_id = 50
         req = requests.get(f"http://api-client.imei.org/api/submit?apikey={API_KEY}&service_id={services_id}&input={imei}").json
-        return req
+        return
 
     def apple_basic_check(imei):
         services_id = 3
