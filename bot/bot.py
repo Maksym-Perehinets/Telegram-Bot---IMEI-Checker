@@ -34,7 +34,7 @@ def imei_cheak(msg: types.Message):  # Doing shit and lie =)
     bot.send_message(msg.chat.id, f"imei {msg.text} is valid")
     bot.register_next_step_handler(msg, buttons)
 
-
+bot.delete_webhook()
 if __name__ == '__main__':
     try:
         bot.infinity_polling()
