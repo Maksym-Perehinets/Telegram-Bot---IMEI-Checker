@@ -14,6 +14,8 @@ class ImeiRequests:
         # creating a list with item id`s name and prices
         for item in req["response"]["services"]:
             prices.append(item)
+        for item in prices:
+            print(item)
 
     def test_request():
         # getting a json with prices and other data

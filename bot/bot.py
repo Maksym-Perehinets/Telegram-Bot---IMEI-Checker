@@ -2,8 +2,7 @@ from telebot import TeleBot, types
 from imei_http_req import ImeiRequests
 from config import BOT_TOKEN
 from time import sleep
-from  ReplyKeyboard import markup
-
+from ReplyKeyboard import markup
 
 bot = TeleBot(BOT_TOKEN)
 
@@ -35,9 +34,10 @@ def imei_cheak(msg: types.Message):  # Doing shit and lie =)
     bot.send_message(msg.chat.id, f"imei {msg.text} is valid")
     bot.register_next_step_handler(msg, buttons)
 
+
 if __name__ == '__main__':
-        try:
-            bot.infinity_polling()
-        except:
-            sleep(10)
-            bot.infinity_polling()
+    try:
+        bot.infinity_polling()
+    except NameError:
+        sleep(10)
+        bot.infinity_polling()
