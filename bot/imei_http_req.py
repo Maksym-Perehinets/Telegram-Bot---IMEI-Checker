@@ -17,8 +17,9 @@ class ImeiRequests:
     # Geting valid pricec and services id`s
     def geting_valid_price_information():
         response = requests.get(api_requests).json()
-        for item in response['response']['services']:
-            services.update({item['name'], [item['id'], item['price']]})
+        for item in response['response']['services']:  # Loop wich converts api answer json file to
+            services.update({item.get('name'): [item.get('id'), item.get('price')]})  #adding new item with valua of key==to name in json and array [a<--Id, b<--price]
+        #print(services)<--Test print
 
     # def get_price():
     #    # getting a json with prices and other data
@@ -34,5 +35,3 @@ class ImeiRequests:
         result = requests.get(api_requests).json()
         print(result)
         return result
-
-
