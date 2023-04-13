@@ -35,9 +35,5 @@ def imei_cheak(msg: types.Message):  # Doing shit and lie =)
     bot.register_next_step_handler(msg, buttons)
 
 
-if __name__ == '__main__':
-    try:
-        bot.infinity_polling()
-    except NameError:
-        sleep(10)
-        bot.infinity_polling()
+bot.infinity_polling()
+
