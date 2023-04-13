@@ -2,7 +2,9 @@ import requests
 from config import API_KEY
 test = f'http://api-client.imei.org/api/services?apikey={API_KEY}'
 
+services_id = 0
 
+#test_array[3] = {API_KEY, services_id, imei}
 prices = []
 
 
@@ -11,7 +13,37 @@ class ImeiRequests:
     def __output(self):
         pass
 
-    def aplle_adanced_cheak(self):
+    def apple_advanced_check(imei):
+        services_id = 50
+        req = requests.get(f"http://api-client.imei.org/api/submit?apikey={API_KEY}&service_id={services_id}&input={imei}").json
+        return req
+
+    def apple_basic_check(imei):
+        services_id = 3
+        return
+
+    def apple_carrier_check(imei):
+        services_id = 17
+        return
+
+    def apple_fms_check(imei):
+        services_id = 2
+        return
+
+    def apple_mdm_check(imei):
+        services_id = 28
+        return
+
+    def apple_mdmpro_check(imei):
+        services_id = 155
+        return
+
+    def apple_warranty_status_check(imei):
+        services_id = 4
+        return
+
+    def apple_simlock_check(imei):
+        services_id = 16
         return
 
     def get_price():
