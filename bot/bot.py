@@ -16,10 +16,10 @@ def start_command(msg: types.Message):
 
 @bot.message_handler(commands=['button'])  # Defining a function with buttons
 def buttons(msg: types.Message):
-    bot.send_message(msg.chat.id, 'Menue', reply_markup=markup)
+    bot.send_message(msg.chat.id, 'Menu', reply_markup=markup)
 
 
-@bot.message_handler(content_types=['text'])  # Button press hendler
+@bot.message_handler(content_types=['text'])  # Button press handler
 def button_answ(msg: types.Message):
     if msg.text == 'Check my imei':  # Case one(checking imei actuality)
         bot.send_message(msg.chat.id, 'Enter your imei:')

@@ -10,8 +10,11 @@ prices = []
 
 class ImeiRequests:
 
-    def __output(self):
-        pass
+    def __output(req):
+        for item in req["response"]["services"]:
+            prices.append(item)
+        for item in prices:
+            print(item)
 
     def apple_advanced_check(imei):
         services_id = 50
