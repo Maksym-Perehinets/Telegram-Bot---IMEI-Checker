@@ -8,6 +8,12 @@ prices = []
 
 class ImeiRequests:
 
+    def __output(self):
+        pass
+
+    def aplle_adanced_cheak(self):
+        return
+
     def get_price():
         # getting a json with prices and other data
         req = requests.get(test).json()
@@ -16,6 +22,7 @@ class ImeiRequests:
             prices.append(item)
         for item in prices:
             print(item)
+
 
     def test_request():
         # getting a json with prices and other data
