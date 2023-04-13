@@ -1,4 +1,3 @@
-WEBHOOK_URL = ''
+WEBHOOK_URL = 'https://39fe-176-120-97-238.ngrok-free.app'
 BOT_TOKEN = '6290787018:AAHbQvjCEzj4_vMOwCb_BXmKpLphCSw1EdE'
 API_KEY = '8GVfasQnt3nXBE3UdtlCgbMpYdHbXXucWQLDuKaeNm2a7va4IPX3JFcBayjv'
-Mysql_port = '3306'

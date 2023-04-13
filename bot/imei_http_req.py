@@ -4,13 +4,13 @@ test = f'http://api-client.imei.org/api/services?apikey={API_KEY}'
 
 services_id = 0
 
-#test_array[3] = {API_KEY, services_id, imei}
+#test_array[3] = {API_KEY, services_id, imei} #хулі тестовий ерей словником опинився
 prices = []
 
 
 class ImeiRequests:
 
-    def __output(req):
+    def __output(req): # to tak nepracuie
         for item in req["response"]["services"]:
             prices.append(item)
         for item in prices:
