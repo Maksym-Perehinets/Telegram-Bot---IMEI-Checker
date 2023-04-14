@@ -18,23 +18,21 @@ class NotEnoughMoneyInBalance(Exception):
 
 class ImeiRequests:
 
-    def output(self):  # to tak nepracuie
-        return self['id']
+    def output(self):    # Function that outputs data from http response
+        pass
 
     # Geting valid pricec and services id`s
-    def geting_valid_price_information():
+    def valid_price_and_balance_check(self):
         response = requests.get(api_requests).json()
         # checks if server is reachable and input data correct else
         if response['status'] != 1:
             raise InvalidImeiServerResponse
-        for item in response['response']['services']:  # Loop which converts api answer json file to
-            # Adding new item with valua of key==to name in json and array [a<--Id, b<--price]
+        for item in response['response']['services']:    # Loop which converts api answer json file to
+            # Adding new item with value of key==to name in json and array [a<--Id, b<--price]
             services.update({item.get('name'): [item.get('id'), item.get('price')]})
         return services
-        # print(services)<--Test print
 
-    def test_request():
+    def test_request(self):
         # getting a json with prices and other data
         result = requests.get(api_requests).json()
-        print(result)
         return result
