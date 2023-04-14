@@ -6,29 +6,31 @@ services = {}
 prices = []
 
 
+class InvalidImeiServerResponse(Exception):
+    """Raised when http request return status==0"""
+    pass
+
+
+class NotEnoughMoneyInBalance(Exception):
+    """Raised when balance on lower then 1$"""
+    pass
+
+
 class ImeiRequests:
 
-    def output(self, req):  # to tak nepracuie
-        for item in req["response"]["services"]:
-            prices.append(item)
-        for item in prices:
-            return item
+    def output(self):  # to tak nepracuie
+        return self['id']
 
     # Geting valid pricec and services id`s
     def geting_valid_price_information():
         response = requests.get(api_requests).json()
-        for item in response['response']['services']:  # Loop wich converts api answer json file to
-            services.update({item.get('name'): [item.get('id'), item.get('price')]})  #adding new item with valua of key==to name in json and array [a<--Id, b<--price]
-        #print(services)<--Test print
-
-    # def get_price():
-    #    # getting a json with prices and other data
-    #     req = requests.get(test).json()
-    #     # creating a list with item id`s name and prices
-    #     for item in req["response"]["services"]:
-    #         prices.append(item)
-    #     for item in prices:
-    #         print(item)
+        # checks if server is reachable and input data correct else
+        if response['status'] != 1:
+            raise InvalidImeiServerResponse
+        for item in response['response']['services']:  # Loop which converts api answer json file to
+            # Adding new item with valua of key==to name in json and array [a<--Id, b<--price]
+            services.update({item.get('name'): [item.get('id'), item.get('price')]})
+        # print(services)<--Test print
 
     def test_request():
         # getting a json with prices and other data

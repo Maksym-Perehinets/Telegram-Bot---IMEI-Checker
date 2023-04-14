@@ -25,7 +25,7 @@ def button_answ(msg: types.Message):
         bot.send_message(msg.chat.id, 'Enter your imei:')
         bot.register_next_step_handler(msg, imei_cheak)
     elif msg.text == 'Test api request':  # Case two(sending a test request)
-        bot.send_message(msg.chat.id, str(ImeiRequests.test_request()))
+        bot.send_message(msg.chat.id, str(ImeiRequests.geting_valid_price_information()))
         bot.register_next_step_handler(msg, buttons)
     bot.register_next_step_handler(msg, buttons)  # Returns to options
 
