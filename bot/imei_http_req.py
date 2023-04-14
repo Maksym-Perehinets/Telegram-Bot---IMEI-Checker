@@ -30,6 +30,7 @@ class ImeiRequests:
         for item in response['response']['services']:  # Loop which converts api answer json file to
             # Adding new item with valua of key==to name in json and array [a<--Id, b<--price]
             services.update({item.get('name'): [item.get('id'), item.get('price')]})
+        print(services)  # Test print
         return services
         # print(services)<--Test print
 
