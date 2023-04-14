@@ -19,15 +19,14 @@ def buttons(msg: types.Message):
     bot.send_message(msg.chat.id, 'Menu', reply_markup=markup)
 
 
-@bot.message_handler(content_types=['text'])  # Button press handler
+# Button press handler
 def button_answ(msg: types.Message):
     if msg.text == 'Check my imei':  # Case one(checking imei actuality)
         bot.send_message(msg.chat.id, 'Enter your imei:')
         bot.register_next_step_handler(msg, imei_cheak)
-    elif msg.text == 'Test api request':  # Case two(sending a test request)
-        bot.send_message(msg.chat.id, str(ImeiRequests.geting_valid_price_information()))
-        bot.register_next_step_handler(msg, buttons)
-    bot.register_next_step_handler(msg, buttons)  # Returns to options
+    elif msg.text == 'Icloud ON/Of':  # Case two(sending a test request)
+        bot.send_message(msg.chat.id, str(ImeiRequests.valid_price_and_balance_check()))
+        bot.register_next_step_handler(msg, buttons)  # Returns to menu
 
 
 def imei_cheak(msg: types.Message):  # Doing shit and lie =)
