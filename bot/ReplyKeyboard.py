@@ -1,7 +1,7 @@
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 # Creation of buttons
-markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+markup = ReplyKeyboardMarkup(resize_keyboard=True)
 # Creation of main butttons
 markup.add(
     KeyboardButton('Icloud ON/Of'),
@@ -19,4 +19,13 @@ markup.add(
     KeyboardButton('Перевірка MDM (Mac, Ipad, Iphone)'),
     KeyboardButton('Мій аккаунт'),
     KeyboardButton('Перевірка оператора')
+    )
+
+from telebot.types import ReplyKeyboardMarkup, KeyboardButton
+
+# Creation of buttons
+markup2 = ReplyKeyboardMarkup(resize_keyboard=True)
+# Creation of main butttons
+markup2.add(
+    KeyboardButton('<--back'),
     )

@@ -2,7 +2,7 @@ from telebot import TeleBot, types
 from imei_http_req import ImeiRequests
 from config import BOT_TOKEN
 from time import sleep
-from ReplyKeyboard import markup
+from ReplyKeyboard import markup, markup2
 
 bot = TeleBot(BOT_TOKEN)
 
@@ -16,23 +16,24 @@ def start_command(msg: types.Message):
 
 @bot.message_handler(commands=['button'])  # Defining a function with buttons
 def buttons(msg: types.Message):
-    bot.send_message(msg.chat.id, 'Menu', reply_markup=markup)
+    print('[a_handler]')
+    bot.send_message(msg.chat.id, 'Доступні опції', reply_markup=markup)
     bot.register_next_step_handler(msg, button_answ)
 
 
 # Button press handler
+
 def button_answ(msg: types.Message):
+    print('[a_handler]')
     if msg.text == 'Check my imei':  # Case one(checking imei actuality)
         bot.send_message(msg.chat.id, 'Enter your imei:')
-        bot.register_next_step_handler(msg, imei_cheak)
     elif msg.text == 'Icloud ON/Of':  # Case two(sending a test request)
         bot.send_message(msg.chat.id, str(ImeiRequests.valid_price_and_balance_check()))
+        bot.send_message(msg.chat.id, 'Бажаєте вернутись назад', reply_markup=markup2)
         bot.register_next_step_handler(msg, buttons)  # Returns to menu
-
-
-def imei_cheak(msg: types.Message):  # Doing shit and lie =)
-    bot.send_message(msg.chat.id, f"imei {msg.text} is valid")
-    bot.register_next_step_handler(msg, buttons)
+    else:
+        bot.send_message(msg.chat.id, 'Incorrect command')
+        bot.register_next_step_handler(msg, buttons)
 
 
 if __name__ == '__main__':
