@@ -6,12 +6,12 @@ services = {}
 prices = []
 
 
-class InvalidImeiServerResponse(Exception):
+class InvalidImeiServerResponse(Exception):    # Server response eror exception
     """Raised when http request return status==0"""
     pass
 
 
-class NotEnoughMoneyInBalance(Exception):
+class NotEnoughMoneyInBalance(Exception):    # Balance eror exception
     """Raised when balance on lower then 1$"""
     pass
 
