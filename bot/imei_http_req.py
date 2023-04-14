@@ -22,7 +22,7 @@ class ImeiRequests:
         pass
 
     # Geting valid pricec and services id`s
-    def valid_price_and_balance_check(self):
+    def valid_price_and_balance_check():
         response = requests.get(api_requests).json()
         # checks if server is reachable and input data correct else
         if response['status'] != 1:
