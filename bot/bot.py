@@ -7,9 +7,9 @@ from ReplyKeyboard import markup
 bot = TeleBot(BOT_TOKEN)
 
 
-@bot.message_handler(commands=['/start'])  # Start comad hendler
+@bot.message_handler(commands=['start'])  # Start comad hendler
 def start_command(msg: types.Message):
-    bot.send_message(msg.chat.id, "Привіт тепер ти можеш мене використовувати!")
+    bot.send_message(msg.chat.id, "Привіт я розроблений з метою полегшення перевірки IMEI твого iPhone")
     # Redirecting to the next stage
     bot.register_next_step_handler(msg, buttons)
 
