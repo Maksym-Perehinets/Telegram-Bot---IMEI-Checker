@@ -12,7 +12,8 @@ markup.add(
     KeyboardButton('Перевірка Icloud на Mac'),
     KeyboardButton('Serial number to IMEI'),
     KeyboardButton('IMEI to serial number'),
-    KeyboardButton('Iphone Basic info'),
+    KeyboardButton('Iphone Basic info'),  # Apple basic check
+    KeyboardButton('Iphone Advanced info'),  # Apple Advanced check
     KeyboardButton('Activation check'),
     KeyboardButton('Дата Купівлі'),
     KeyboardButton('Перевірка MDM (Mac, Ipad, Iphone)'),
