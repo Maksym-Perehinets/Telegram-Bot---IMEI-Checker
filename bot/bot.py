@@ -17,6 +17,7 @@ def start_command(msg: types.Message):
 @bot.message_handler(commands=['button'])  # Defining a function with buttons
 def buttons(msg: types.Message):
     bot.send_message(msg.chat.id, 'Menu', reply_markup=markup)
+    bot.register_next_step_handler(msg, button_answ)
 
 
 # Button press handler
