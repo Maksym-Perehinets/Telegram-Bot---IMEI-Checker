@@ -16,7 +16,6 @@ def start_command(msg: types.Message):
 
 @bot.message_handler(commands=['button'])  # Defining a function with buttons
 def buttons(msg: types.Message):
-    print('[a_handler]')
     bot.send_message(msg.chat.id, 'Доступні опції', reply_markup=markup)
     bot.register_next_step_handler(msg, button_answ)
 
@@ -24,7 +23,6 @@ def buttons(msg: types.Message):
 # Button press handler
 
 def button_answ(msg: types.Message):
-    print('[a_handler]')
     if msg.text == 'Check my imei':  # Case one(checking imei actuality)
         bot.send_message(msg.chat.id, 'Enter your imei:')
     elif msg.text == 'Icloud ON/Of':  # Case two(sending a test request)
