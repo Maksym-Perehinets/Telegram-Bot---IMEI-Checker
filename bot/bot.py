@@ -21,7 +21,6 @@ def buttons(msg: types.Message):
 
 
 # Button press handler
-
 def button_answ(msg: types.Message):
     if msg.text == 'Check my imei':  # Case one(checking imei actuality)
         bot.send_message(msg.chat.id, 'Enter your imei:')
