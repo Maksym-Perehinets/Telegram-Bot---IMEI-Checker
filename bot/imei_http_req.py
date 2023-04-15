@@ -6,12 +6,12 @@ services = {}
 prices = []
 
 
-class InvalidImeiServerResponse(Exception):    # Server response eror exception
+class InvalidImeiServerResponse(Exception):    # Server response error exception
     """Raised when http request return status==0"""
     pass
 
 
-class NotEnoughMoneyInBalance(Exception):    # Balance eror exception
+class NotEnoughMoneyInBalance(Exception):    # Balance error exception
     """Raised when balance on lower then 1$"""
     pass
 
@@ -22,7 +22,7 @@ class ImeiRequests:
         pass
 
     # Geting valid pricec and services id`s
-    def valid_price_and_balance_check():
+    def valid_price_and_balance_check(self):
         response = requests.get(api_requests).json()
         # checks if server is reachable and input data correct else
         if response['status'] != 1:
