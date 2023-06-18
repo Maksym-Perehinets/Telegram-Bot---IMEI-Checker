@@ -18,9 +18,6 @@ class NotEnoughMoneyInBalance(Exception):
 
 class ImeiRequests:
 
-    def output(self):  # to tak nepracuie
-        return self['id']
-
     # Geting valid pricec and services id`s
     def geting_valid_price_information():
         response = requests.get(api_requests).json()
@@ -38,3 +35,5 @@ class ImeiRequests:
         result = requests.get(api_requests).json()
         print(result)
         return result
+
+print(requests.get(api_requests).json())
