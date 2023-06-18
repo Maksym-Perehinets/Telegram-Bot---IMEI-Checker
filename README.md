@@ -8,7 +8,6 @@ Simple telegram bot with payment api
       - [] _Create tests for part 1_
 [ ] **Main part**
       - []add mysql database 
-      - []add payments from tg
       - [-/+]add basic UI
       - [] _Create tests for part 2_
 [ ] **Final part** 
