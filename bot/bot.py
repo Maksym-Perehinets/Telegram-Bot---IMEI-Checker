@@ -24,6 +24,8 @@ def response(msg):
 def buttons(msg):
     if msg.text == "Icloud ON/Of":
         bot.send_message(msg.chat.id, )
+
+
 if __name__ == '__main__':
     try:
         bot.infinity_polling()
