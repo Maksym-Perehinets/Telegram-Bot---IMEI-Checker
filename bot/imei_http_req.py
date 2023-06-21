@@ -1,5 +1,7 @@
 import requests
 from config import API_KEY
+from io import BytesIO
+
 api_requests_service_list = f'http://api-client.imei.org/api/services?apikey={API_KEY}'
 api_requests_order = f'http://api-client.imei.org/api/submit?apikey={API_KEY}'
 services_by_default = {'Icloud ON/Of': 22, 'Icloud clean/lost': 23,
@@ -38,7 +40,6 @@ class ImeiRequests:
         service_id = services_by_default.get(service_name)
         return service_id if service_id is not None else None
 
-
     def user_request(self, service_id, imei):
         ImeiRequests.geting_valid_price_information()
         prms = services.get(service_id)[0]
@@ -46,23 +47,23 @@ class ImeiRequests:
         resp = requests.get(api_requests_order, params=prms).json()
         if imei == "35487209158054":
             resp = {
-                    "status":1,
-                    "response":{
-                    "ssrvc":[
-                    {"Model":"IPHONE X 64GB SPACE GRAY CELLULAR [A1901] [IPHONE10,6]",
-                    "IMEI":"35487209158054",
-                    "Serial Number":"F17WT34LJQ5S",
-                    "Warranty Status":"Out Of Warranty (No Coverage)",
-                    "Estimated Purchase Date":"2018-08-11",
-                    "Valid Purchase Date":"Yes",
-                    "Telephone Technical Support":"Expired",
-                    "Repairs and Service Coverage":"Expired",
-                    "Loaner Device":"No",
-                    "Apple Care":"No",
-                    "FMI":"ON",
-                    "iCloud":"LOST \/ ERASED",
-                    "Activated":"YES",
-                    "Simlock":"UNLOCKED"},]}}
+                "status": 1,
+                "response": {
+                    "ssrvc": [
+                        {"Model": "IPHONE X 64GB SPACE GRAY CELLULAR [A1901] [IPHONE10,6]",
+                         "IMEI": "35487209158054",
+                         "Serial Number": "F17WT34LJQ5S",
+                         "Warranty Status": "Out Of Warranty (No Coverage)",
+                         "Estimated Purchase Date": "2018-08-11",
+                         "Valid Purchase Date": "Yes",
+                         "Telephone Technical Support": "Expired",
+                         "Repairs and Service Coverage": "Expired",
+                         "Loaner Device": "No",
+                         "Apple Care": "No",
+                         "FMI": "ON",
+                         "iCloud": "LOST \/ ERASED",
+                         "Activated": "YES",
+                         "Simlock": "UNLOCKED"}, ]}}
 
         ssrvc = resp["response"]["ssrvc"]
         output_text = ""
@@ -71,3 +72,7 @@ class ImeiRequests:
                 output_text += f"{key}: {value}\n"
             output_text += "\n"
         return output_text if resp['status'] != 0 else 'Low balance'
+
+    def response_to_file(self, data):
+        file = BytesIO(data.encode())
+        return file
