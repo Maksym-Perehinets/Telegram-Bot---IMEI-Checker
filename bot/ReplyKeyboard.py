@@ -2,7 +2,7 @@ from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 # Creation of buttons
 markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-# Creation of main butttons
+# Creation of main buttons
 markup.add(
     KeyboardButton('Icloud ON/Of'),
     KeyboardButton('Icloud clean/lost'),
@@ -19,11 +19,11 @@ markup.add(
     KeyboardButton('Перевірка MDM (Mac, Ipad, Iphone)'),
     KeyboardButton('Перевірка оператора'),
     KeyboardButton('Мій аккаунт')
-    )
+)
 
 # Creation of buttons
-markup2 = ReplyKeyboardMarkup(resize_keyboard=True)
+markup_back = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 # Creation of main butttons
-markup2.add(
-    KeyboardButton('<--back'),
-    )
+markup_back.add(
+    KeyboardButton('Повернутись назад')
+)
