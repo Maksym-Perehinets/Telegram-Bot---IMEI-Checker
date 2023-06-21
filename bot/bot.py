@@ -1,4 +1,3 @@
-import json
 from telebot import TeleBot, types
 from imei_http_req import ImeiRequests
 from config import BOT_TOKEN
