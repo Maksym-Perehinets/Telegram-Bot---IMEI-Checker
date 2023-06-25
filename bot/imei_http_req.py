@@ -61,7 +61,7 @@ class ImeiRequests:
                          "Loaner Device": "No",
                          "Apple Care": "No",
                          "FMI": "ON",
-                         "iCloud": "LOST \/ ERASED",
+                         "iCloud": "LOST and ERASED",
                          "Activated": "YES",
                          "Simlock": "UNLOCKED"}, ]}}
 

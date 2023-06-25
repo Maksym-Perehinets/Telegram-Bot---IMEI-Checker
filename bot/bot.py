@@ -3,7 +3,7 @@ from imei_http_req import ImeiRequests
 from config import BOT_TOKEN
 from time import sleep
 from Inline_keyboard import Inline_keyboard_one, Inline_keyboard_back, Inline_keyboard_get_file
-from ReplyKeyboard import markup, markup_back
+from ReplyKeyboard import markup
 
 bot = TeleBot(BOT_TOKEN)
 
@@ -12,8 +12,7 @@ resp_file = None
 @bot.message_handler(commands=['start'])  # Start comad hendler
 def start_command(msg: types.Message):
     # Redirecting to the next stage
-    bot.send_message(msg.chat.id, "Привіт я розроблений з метою полегшення перевірки IMEI твого iPhone. "
-                                  "Коротнка інформація. Для поповнення балансу напишіть @user",
+    bot.send_message(msg.chat.id, "Привіт я розроблений з метою полегшення перевірки IMEI твого iPhone. ",
                      reply_markup=Inline_keyboard_one
                      )
 
@@ -25,6 +24,7 @@ def response(msg):
         bot.register_next_step_handler(msg.message, messages)
     elif msg.data == 'generate_file':
         global resp_file
+        bot.edit_message_reply_markup(msg.message.chat.id, msg.message.id)
         a = bot.send_document(msg.message.chat.id, document=resp_file, visible_file_name='response.json')
         bot.send_message(msg.message.chat.id, "Menue", reply_markup=markup)
     else:
