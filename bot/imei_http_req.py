@@ -44,7 +44,9 @@ class ImeiRequests:
         ImeiRequests.geting_valid_price_information()
         prms = services.get(service_id)[0]
         prms['input'] = imei
+        prms['dontWait'] = 1
         resp = requests.get(api_requests_order, params=prms).json()
+        print(resp)
         if imei == "35487209158054":
             resp = {
                 "status": 1,
@@ -64,14 +66,13 @@ class ImeiRequests:
                          "iCloud": "LOST and ERASED",
                          "Activated": "YES",
                          "Simlock": "UNLOCKED"}, ]}}
-
         ssrvc = resp["response"]["services"]
         output_text = ""
         for ssrvc in ssrvc:
             for key, value in ssrvc.items():
                 output_text += f"{key}: {value}\n"
             output_text += "\n"
-        return output_text if resp['status'] != 0 else 'Low balance'
+        return output_text if resp['status'] != 0 else resp['error']
 
     def response_to_file(self, data):
         file = BytesIO(data.encode())
