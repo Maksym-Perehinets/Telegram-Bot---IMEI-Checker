@@ -49,7 +49,7 @@ class ImeiRequests:
             resp = {
                 "status": 1,
                 "response": {
-                    "ssrvc": [
+                    "services": [
                         {"Model": "IPHONE X 64GB SPACE GRAY CELLULAR [A1901] [IPHONE10,6]",
                          "IMEI": "35487209158054",
                          "Serial Number": "F17WT34LJQ5S",
@@ -65,7 +65,7 @@ class ImeiRequests:
                          "Activated": "YES",
                          "Simlock": "UNLOCKED"}, ]}}
 
-        ssrvc = resp["response"]["ssrvc"]
+        ssrvc = resp["response"]["services"]
         output_text = ""
         for ssrvc in ssrvc:
             for key, value in ssrvc.items():
