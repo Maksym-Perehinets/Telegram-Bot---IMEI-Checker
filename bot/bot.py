@@ -25,7 +25,7 @@ def response(msg):
     elif msg.data == 'generate_file':
         global resp_file
         bot.edit_message_reply_markup(msg.message.chat.id, msg.message.id)
-        a = bot.send_document(msg.message.chat.id, document=resp_file, visible_file_name='response.json')
+        bot.send_document(msg.message.chat.id, document=resp_file, visible_file_name='response.json')
         bot.send_message(msg.message.chat.id, "Menue", reply_markup=markup)
     else:
         bot.send_message(msg.message.chat.id, "Menue", reply_markup=markup)
@@ -43,7 +43,10 @@ def imei_resp(msg, service_id):
         global resp_file
         resp = ImeiRequests.user_request(None, service_id, msg.text)
         resp_file = ImeiRequests.response_to_file(None, resp)
-        bot.send_message(msg.chat.id, resp, reply_markup=Inline_keyboard_get_file)
+        if isinstance(resp_file, str):
+            bot.send_message(msg.chat.id, "Your request was rejected", reply_markup=markup)
+        else:
+            bot.send_message(msg.chat.id, resp, reply_markup=Inline_keyboard_get_file)
 
 
 

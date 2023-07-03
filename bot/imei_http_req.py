@@ -41,39 +41,24 @@ class ImeiRequests:
         return service_id if service_id is not None else None
 
     def user_request(self, service_id, imei):
-        ImeiRequests.geting_valid_price_information()
-        prms = services.get(service_id)[0]
-        prms['input'] = imei
-        prms['dontWait'] = 1
-        resp = requests.get(api_requests_order, params=prms).json()
+        ImeiRequests.geting_valid_price_information()  # Getting valid information about prices
+
+        prms = services.get(service_id)[0]  # Preparing input parameters id
+        prms['input'] = imei  # Preparing input parameters imei
+        print(prms)
+
+        resp = requests.get(api_requests_order, params=prms).json()  # Getting server response
         print(resp)
-        if imei == "35487209158054":
-            resp = {
-                "status": 1,
-                "response": {
-                    "services": [
-                        {"Model": "IPHONE X 64GB SPACE GRAY CELLULAR [A1901] [IPHONE10,6]",
-                         "IMEI": "35487209158054",
-                         "Serial Number": "F17WT34LJQ5S",
-                         "Warranty Status": "Out Of Warranty (No Coverage)",
-                         "Estimated Purchase Date": "2018-08-11",
-                         "Valid Purchase Date": "Yes",
-                         "Telephone Technical Support": "Expired",
-                         "Repairs and Service Coverage": "Expired",
-                         "Loaner Device": "No",
-                         "Apple Care": "No",
-                         "FMI": "ON",
-                         "iCloud": "LOST and ERASED",
-                         "Activated": "YES",
-                         "Simlock": "UNLOCKED"}, ]}}
-        ssrvc = resp["response"]["services"]
-        output_text = ""
-        for ssrvc in ssrvc:
-            for key, value in ssrvc.items():
+
+        if resp["status"] != -1:
+            answ = resp["response"]
+            output_text = ""
+            for key, value in answ.items():
                 output_text += f"{key}: {value}\n"
             output_text += "\n"
-        return output_text if resp['status'] != 0 else resp['error']
+            return output_text
+        else:
+            return resp["error"]
 
     def response_to_file(self, data):
-        file = BytesIO(data.encode())
-        return file
+        return BytesIO(data.encode()) if len(data.split()) > 1 else data
