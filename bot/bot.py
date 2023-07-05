@@ -1,4 +1,3 @@
-import telebot.types
 from telebot import TeleBot, types
 from imei_http_req import ImeiRequests
 from credentials.config import BOT_TOKEN
