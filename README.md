@@ -7,8 +7,8 @@ Simple telegram bot with payment api
       - [+]add basic classes 
       - [] _Create tests for part 1_
 [ ] **Main part**
-      - []add mysql database 
-      - [-/+]add basic UI
+      - []add google sheets as data base  
+      - [+]add basic UI
       - [] _Create tests for part 2_
 [ ] **Final part** 
       - [] Improve optimization

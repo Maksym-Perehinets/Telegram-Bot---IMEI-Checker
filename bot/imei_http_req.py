@@ -1,9 +1,8 @@
 import requests
-from config import API_KEY
+from credentials.config import api_requests_service_list, api_requests_order
 from io import BytesIO
 
-api_requests_service_list = f'http://api-client.imei.org/api/services?apikey={API_KEY}'
-api_requests_order = f'http://api-client.imei.org/api/submit?apikey={API_KEY}'
+
 services_by_default = {'Icloud ON/Of': 22, 'Icloud clean/lost': 23,
                        'Перевірка оператора': 17, 'Перевірка lock/unlock': 16,
                        'Перевірка MDM статусу Iphone': 155, 'Перевірка Icloud на Mac': 6,
@@ -16,11 +15,6 @@ services = {}
 
 class InvalidImeiServerResponse(Exception):
     """Raised when http request return status==0"""
-    pass
-
-
-class NotEnoughMoneyInBalance(Exception):
-    """Raised when balance on lower then 1$"""
     pass
 
 

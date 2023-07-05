@@ -1,6 +1,6 @@
 from telebot import TeleBot, types
 from imei_http_req import ImeiRequests
-from config import BOT_TOKEN
+from credentials.config import BOT_TOKEN
 from time import sleep
 from Inline_keyboard import Inline_keyboard_one, Inline_keyboard_back, Inline_keyboard_get_file
 from ReplyKeyboard import markup
@@ -8,6 +8,8 @@ from ReplyKeyboard import markup
 bot = TeleBot(BOT_TOKEN)
 
 resp_file = None
+IMEI = ImeiRequests()
+
 
 @bot.message_handler(commands=['start'])  # Start comad hendler
 def start_command(msg: types.Message):
@@ -33,22 +35,20 @@ def response(msg):
 
 @bot.message_handler(content_types=['text'])
 def messages(msg):
-    service_id = ImeiRequests.get_id(None, msg.text)
+    service_id = IMEI.get_id(msg.text)
     bot.send_message(msg.chat.id, "Send your Imei number", reply_markup=Inline_keyboard_back)
     bot.register_next_step_handler(msg, imei_resp, service_id)
 
 
 def imei_resp(msg, service_id):
-    if ImeiRequests.get_id(None, msg.text) is None:
+    if IMEI.get_id(msg.text) is None:
         global resp_file
-        resp = ImeiRequests.user_request(None, service_id, msg.text)
-        resp_file = ImeiRequests.response_to_file(None, resp)
+        resp = IMEI.user_request(service_id, msg.text)
+        resp_file = IMEI.response_to_file(resp)
         if isinstance(resp_file, str):
             bot.send_message(msg.chat.id, "Your request was rejected", reply_markup=markup)
         else:
             bot.send_message(msg.chat.id, resp, reply_markup=Inline_keyboard_get_file)
-
-
 
 
 if __name__ == '__main__':
