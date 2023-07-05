@@ -9,7 +9,8 @@ services_by_default = {'Icloud ON/Of': 22, 'Icloud clean/lost': 23,
                        'Serial number to IMEI': 0000, 'IMEI to serial number': 7,
                        'Iphone Basic info': 3, 'Iphone Advanced info': 50,
                        'Activation check': 0, 'Дата Купівлі': 0,
-                       'Перевірка MDM (Mac, Ipad, Iphone)': 28}
+                       'Перевірка MDM (Mac, Ipad, Iphone)': 28,
+                       'Мій аккаунт': 78564}
 services = {}
 
 

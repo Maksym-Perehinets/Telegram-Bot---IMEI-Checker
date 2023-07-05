@@ -5,4 +5,8 @@
     <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="C:\Users\super\PycharmProjects\Cours_work\requirements.txt" />
+    <option name="versionSpecifier" value="Greater or equal (&gt;=x.y.z)" />
+  </component>
 </module>

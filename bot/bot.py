@@ -4,19 +4,22 @@ from credentials.config import BOT_TOKEN
 from time import sleep
 from Inline_keyboard import Inline_keyboard_one, Inline_keyboard_back, Inline_keyboard_get_file
 from ReplyKeyboard import markup
+from sheets_api import Sheet_api
 
 bot = TeleBot(BOT_TOKEN)
 
 resp_file = None
 IMEI = ImeiRequests()
+sh_api = Sheet_api()
 
 
-@bot.message_handler(commands=['start'])  # Start comad hendler
+@bot.message_handler(commands=['start'])  # Handle start command and add user id to the table 
 def start_command(msg: types.Message):
     # Redirecting to the next stage
-    bot.send_message(msg.chat.id, "Привіт я розроблений з метою полегшення перевірки IMEI твого iPhone. ",
+    bot.send_message(msg.chat.id, "Привіт я розроблений з метою полегшення перевірки IMEI твого iPhone. Created by https://t.me/Maksym_Per",
                      reply_markup=Inline_keyboard_one
                      )
+    sh_api.creat_new_user(str(msg.from_user.id))
 
 
 @bot.callback_query_handler(func=lambda msg: True)
@@ -36,8 +39,14 @@ def response(msg):
 @bot.message_handler(content_types=['text'])
 def messages(msg):
     service_id = IMEI.get_id(msg.text)
-    bot.send_message(msg.chat.id, "Send your Imei number", reply_markup=Inline_keyboard_back)
-    bot.register_next_step_handler(msg, imei_resp, service_id)
+    # check whether user wants to check balance or make purchase
+    if service_id != 78564:
+        bot.send_message(msg.chat.id, "Send your Imei number", reply_markup=Inline_keyboard_back)
+        bot.register_next_step_handler(msg, imei_resp, service_id)
+    else:
+        # Output balance
+        bot.send_message(msg.chat.id, f"Ваш баланс: {sh_api.get_balance(str(msg.from_user.id))}$",
+                         reply_markup=Inline_keyboard_back)
 
 
 def imei_resp(msg, service_id):

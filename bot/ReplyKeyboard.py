@@ -1,7 +1,7 @@
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 # Creation of buttons
-markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2, one_time_keyboard=True)
 # Creation of main buttons
 markup.add(
     KeyboardButton('Icloud ON/Of'),
