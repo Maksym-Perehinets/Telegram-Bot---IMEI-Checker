@@ -1,22 +1,25 @@
+import telebot.types
 from telebot import TeleBot, types
 from imei_http_req import ImeiRequests
 from credentials.config import BOT_TOKEN
 from time import sleep
-from Inline_keyboard import Inline_keyboard_one, Inline_keyboard_back, Inline_keyboard_get_file
+from Inline_keyboard import Inline_keyboard_one, Inline_keyboard_back, Inline_keyboard_get_file, Inline_keyboard_balance
 from ReplyKeyboard import markup
-from sheets_api import Sheet_api
+from sheets_api import SheetApi
 
 bot = TeleBot(BOT_TOKEN)
 
 resp_file = None
 IMEI = ImeiRequests()
-sh_api = Sheet_api()
+sh_api = SheetApi()
 
 
 @bot.message_handler(commands=['start'])  # Handle start command and add user id to the table 
 def start_command(msg: types.Message):
     # Redirecting to the next stage
-    bot.send_message(msg.chat.id, "Привіт я розроблений з метою полегшення перевірки IMEI твого iPhone. Created by https://t.me/Maksym_Per",
+    bot.send_message(msg.chat.id,
+                     "Привіт я розроблений з метою полегшення перевірки IMEI твого iPhone. "
+                     "Created by https://t.me/Maksym_Per",
                      reply_markup=Inline_keyboard_one
                      )
     sh_api.creat_new_user(str(msg.from_user.id))
@@ -41,21 +44,25 @@ def messages(msg):
     service_id = IMEI.get_id(msg.text)
     # check whether user wants to check balance or make purchase
     if service_id != 78564:
-        bot.send_message(msg.chat.id, "Send your Imei number", reply_markup=Inline_keyboard_back)
+        bot.send_message(msg.chat.id, "Відправте імеі вашого пристрою та очікуйте"
+                                      " перевірка може зайняти до 3ох хвилин", reply_markup=Inline_keyboard_back)
         bot.register_next_step_handler(msg, imei_resp, service_id)
     else:
         # Output balance
-        bot.send_message(msg.chat.id, f"Ваш баланс: {sh_api.get_balance(str(msg.from_user.id))}$",
-                         reply_markup=Inline_keyboard_back)
+        bot.send_message(msg.chat.id, f"Ваш telegram ID: {str(msg.from_user.id)}"
+                                      f"Ваш баланс: {sh_api.get_balance(str(msg.from_user.id))}$",
+                         reply_markup=Inline_keyboard_balance)
 
 
 def imei_resp(msg, service_id):
     if IMEI.get_id(msg.text) is None:
         global resp_file
-        resp = IMEI.user_request(service_id, msg.text)
+        resp = IMEI.user_request(service_id, msg.text, str(msg.from_user.id))  # Get IMEI response
         resp_file = IMEI.response_to_file(resp)
+
         if isinstance(resp_file, str):
-            bot.send_message(msg.chat.id, "Your request was rejected", reply_markup=markup)
+            bot.send_message(msg.chat.id, "Ваш запит було відхилено "
+                                          "перевіте правильність введених данних", reply_markup=markup)
         else:
             bot.send_message(msg.chat.id, resp, reply_markup=Inline_keyboard_get_file)
 

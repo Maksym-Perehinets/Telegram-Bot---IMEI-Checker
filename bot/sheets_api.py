@@ -11,24 +11,22 @@ service = build('sheets',
                 )  # Creates connection
 
 
-class Sheet_api():
-    # Adding new users to table
+class SheetApi:
 
+    # Adding new users to table
     def get_data(self):
         return service.spreadsheets().values().get(
             spreadsheetId=SHEET_ID,
             range="Users"
         ).execute()
 
-
     def get_balance(self, idd):
         result = self.get_data()
-
         for i in result['values']:  # Searching for balance of specific user
             if i[0] == idd:
                 balance = i[1].replace(',', '.')  # For convertation to float
-                return balance
 
+                return balance
 
     def creat_new_user(self, idd):
         try:
@@ -51,19 +49,15 @@ class Sheet_api():
             ).execute()
 
     # Withdraw certain amount of money from user balance
-    def cheak_out(self, idd, amount):
+    def chek_out(self, idd, amount):
         try:
             # Getting data from Google sheets
             result = self.get_data()
-
         except HttpError:
             print("An error occurred")  # Should be tg bot message to owner
-
         for i in result['values']:  # Searching for balance of specific user
-
             if i[0] == idd:
                 balance = i[1].replace(',', '.')  # For convertation to float
-
                 if float(balance) < amount:
                     return 0  # Return 0 if balance lower then withdraw
                 else:
@@ -78,8 +72,9 @@ class Sheet_api():
                             valueInputOption="USER_ENTERED",
                             body={'values': [[str(float(balance) - amount).replace('.', ',')]]}
                         ).execute()
-
                     except HttpError:
                         print("An error occurred")  # Should be tg bot message to owner
+
+                    return 1  # Return 1 if successful
         else:
             return 'No such user'  # Message to bot owner
