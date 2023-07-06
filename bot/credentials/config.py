@@ -8,6 +8,6 @@ api_requests_service_list = f'http://api-client.imei.org/api/services?apikey={AP
 api_requests_order = f'http://api-client.imei.org/api/submit?apikey={API_KEY}'
 
 # GOOGLE sheet API imports
-CRED_FILE = "bot/credentials/cred.json"
+CRED_FILE = "credentials/cred.json"
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SHEET_ID = "1QYKrweZnNv9cIU2msMZ34yCf1famnV0JzG4bitpZxI0"
