@@ -14,7 +14,7 @@ Inline_keyboard_back.add(
 )
 
 Inline_keyboard_get_file.add(
-    InlineKeyboardButton('Отримати json файл з даними', callback_data="generate_file")
+    InlineKeyboardButton('Отримати txt файл з даними', callback_data="generate_file")
 )
 
 Inline_keyboard_balance.add(

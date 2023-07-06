@@ -32,7 +32,7 @@ def response(msg):
     elif msg.data == 'generate_file':
         global resp_file
         bot.edit_message_reply_markup(msg.message.chat.id, msg.message.id)
-        bot.send_document(msg.message.chat.id, document=resp_file, visible_file_name='response.json')
+        bot.send_document(msg.message.chat.id, document=resp_file, visible_file_name='response.txt')
         bot.send_message(msg.message.chat.id, "Menue", reply_markup=markup)
     else:
         bot.send_message(msg.message.chat.id, "Menue", reply_markup=markup)
@@ -43,12 +43,14 @@ def messages(msg):
     service_id = IMEI.get_id(msg.text)
     # check whether user wants to check balance or make purchase
     if service_id != 78564:
-        bot.send_message(msg.chat.id, "Відправте імеі вашого пристрою та очікуйте"
-                                      " перевірка може зайняти до 3ох хвилин", reply_markup=Inline_keyboard_back)
+        bot.send_message(msg.chat.id,
+                         "Відправте імеі вашого пристрою та очікуйте перевірка може зайняти до 3ох хвилин.\n"
+                         f"Вартість данної послуги складе {IMEI.price_inf(service_id)}",
+                         reply_markup=Inline_keyboard_back)
         bot.register_next_step_handler(msg, imei_resp, service_id)
     else:
         # Output balance
-        bot.send_message(msg.chat.id, f"Ваш telegram ID: {str(msg.from_user.id)}"
+        bot.send_message(msg.chat.id, f"Ваш telegram ID: {str(msg.from_user.id)}\n"
                                       f"Ваш баланс: {sh_api.get_balance(str(msg.from_user.id))}$",
                          reply_markup=Inline_keyboard_balance)
 
