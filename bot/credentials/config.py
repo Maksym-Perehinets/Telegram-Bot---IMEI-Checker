@@ -1,5 +1,5 @@
 # Telebot API imports
-BOT_TOKEN = '6290787018:AAHbQvjCEzj4_vMOwCb_BXmKpLphCSw1EdE'
+BOT_TOKEN = ''
 BOT_OWNER = ' '
 
 # IMEI API KEYS and LINKS
